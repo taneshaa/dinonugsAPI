@@ -11,6 +11,11 @@ const Handler = require('./modules/handlers');
 
 // impomrt and connect mongoose to mongodb
 const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_CONNECTION);
+const db = mongoose.connection;
+// test to see if database is on
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', () => console.log('connected to mongo db'));
 
 // create instances of express
 const app = express();
